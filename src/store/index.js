@@ -2,34 +2,36 @@ import { createStore } from 'vuex';
 
 const store = createStore({
   state() {
+    // Load memories from localStorage, or use default values if none exist
+    const storedMemories = localStorage.getItem('memories');
     return {
-      memories: [
+      memories: storedMemories ? JSON.parse(storedMemories) : [
         {
           id: "m1",
-          image: "https://www.charnveeresortkhaoyai.com/wp-content/uploads/2023/12/Rancho-Dec-1-%E0%B8%97%E0%B8%B0%E0%B9%80%E0%B8%A5%E0%B8%97%E0%B8%B5%E0%B9%88-%E0%B8%AA%E0%B8%A7%E0%B8%A2%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B9%83%E0%B8%99%E0%B9%84%E0%B8%97%E0%B8%A2-04-1536x1024.jpg.webp",
+          image: "https://promotions.co.th/wp-content/uploads/2021/03/%E0%B9%80%E0%B8%81%E0%B8%B2%E0%B8%B0%E0%B8%AA%E0%B8%B4%E0%B8%A1%E0%B8%B4%E0%B8%A5%E0%B8%B1%E0%B8%99.jpg",
           title: "การท่องเที่ยว",
           description: "การท่องเที่ยวในภาคใต้",
         },
         {
           id: "m2",
-          image: "https://www.top10.in.th/wp-content/uploads/2023/04/%E0%B9%84%E0%B8%A1%E0%B9%89%E0%B9%81%E0%B8%9A%E0%B8%94%E0%B8%A1%E0%B8%B4%E0%B8%99%E0%B8%95%E0%B8%B1%E0%B8%99-%E0%B8%94%E0%B8%B5%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%AA%E0%B8%B8%E0%B8%94.jpg",
+          image: "https://www.euroschoolindia.com/wp-content/uploads/2023/08/how-to-play-badminton.jpg",
           title: "การออกกำลังกาย",
           description: "เล่นแบดมินตัน",
         },
         {
           id: "m3",
-          image: "https://lh4.googleusercontent.com/LVmbbvlQgKcH5HGVl7q1HqmQ7d63vNV5lBJ8GIp9rYKRdWmCiu1nJ0WZgdOLC14rIxsoL7pgMBLoNGmE4ocpjS9sK8CIhhYmKgH3751Q4bOwnC9_hB4FmQlh2B1jIGrrVQP-3I11AKi-sjcrsbwQ3fYMWhCbAbeeFPk9Szg2Z-XQOlMw1wiRWWM-A08J",
+          image: "https://img.kapook.com/u/2020/Tanapol/health/sleeping/w2.jpg",
           title: "การนอน",
           description: "นอนไม่เกิน 5 ทุ่ม",
         },
         {
           id: "m4",
-          image: "https://static.trueplookpanya.com/tppy/member/m_230000_232500/231226/cms/images/shutterstock_1932596657.jpg",
+          image: "https://makebykbank.kbtg.tech/dynamic-content/articles/211206-Why-saving-money-is-important/saving.png",
           title: "การใช้จ่ายเงิน",
           description: "เก็บออมเดือนละ 1,500",
-        },
-      ],
-    };
+        }
+      ] 
+    } // Default memories if localStorage is empty
   },
   mutations: {
     addMemory(state, memoryData) {
@@ -41,6 +43,8 @@ const store = createStore({
       };
 
       state.memories.unshift(newMemory);
+      // Persist the updated memories list to localStorage
+      localStorage.setItem('memories', JSON.stringify(state.memories));
     },
   },
   actions: {
