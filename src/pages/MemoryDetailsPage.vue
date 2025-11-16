@@ -10,6 +10,7 @@
       :title="loadedMemory.title" 
       :image="loadedMemory.image" 
       :description="loadedMemory.description"
+      
     ></memory-overview>
   </base-layout>
 </template>
